@@ -22,7 +22,7 @@ public class FileInterpreter
     static int currRecursion = 0;
     private const int RECURSIVE_DEPTH_LIMIT = 10;  // Max number of recursive calls allowed
     
-    private CSInterpreter _consoleInterpreter = new();
+    private readonly CSInterpreter _consoleInterpreter = new();
 
     /// <summary>
     /// Given a string `text` separated by '\n' characters,
