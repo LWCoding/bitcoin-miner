@@ -14,17 +14,16 @@ public struct GameFile
         FileName = fileName;
         FileContents = fileContents;
         IsOpen = false;
-        // If the file name is bad, this shouldn't be
-        // properly added. Set it to garbage data.
-        if (!IsValidFileName(fileName))
-        {
-            FileName = "badfilename";
-        }
     }
     public static bool IsValidFileName(string fileName)
     {
-        // Require that files ONLY consist of alphabetical/numerical chars
-        if (!fileName.All(c => "abcdefghijklmnopqrstuvwxyz1234567890".Contains(c)))
+        // Require that files ONLY consist of alphabetical/numerical chars or periods
+        if (!fileName.All(c => "abcdefghijklmnopqrstuvwxyz1234567890.".Contains(c)))
+        {
+            return false;
+        }
+        // Files cannot start or end with a period
+        if (fileName[0] == '.' || fileName[^1] == '.')
         {
             return false;
         }
@@ -61,9 +60,9 @@ public static class GameState
         }
     }
 
-    public static Action<float> OnChangeBitcoin = null;
+    public static Action<float> OnChangeBitcoin = null;  // Calls when clicks are set
 
-    public static List<GameFile> CreatedFiles = new();
-    public const int FILENAME_MAX_LENGTH = 12;
+    public static List<GameFile> CreatedFiles = new();  // Empty list to hold created files
+    public const int FILENAME_MAX_LENGTH = 12;  // Max name length of any file
 
 }
