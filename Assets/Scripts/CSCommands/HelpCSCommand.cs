@@ -4,32 +4,32 @@ using System.Reflection;
 using System.Linq;
 using System;
 
-public class HelpCommand : BaseCommand
+public class HelpCSCommand : BaseCSCommand
 {
 
     public override string GetCommandUsageEx() => "help";
     public override string GetCommandDescription() =>
 @"Displays this help desk.";
 
-    public override void RunCommand(List<string> args, ref InterpreterResponse res)
+    public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {
         Help(ref res);
     }
 
-    private void Help(ref InterpreterResponse res)
+    private void Help(ref CSInterpreterResponse res)
     {
         //res.text = HelpString;
-        res.status = Status.OK;
+        res.status = CSStatus.OK;
         res.text = GetAllCommands();
     }
 
     public string GetAllCommands()
     {
-        // Get all types that are subclass of BaseCommand and can be instantiated
+        // Get all types that are subclass of BaseCSCommand and can be instantiated
         var commandTypes = Assembly
-            .GetAssembly(typeof(BaseCommand)) // Adjust this if your BaseCommand is in a different assembly
+            .GetAssembly(typeof(BaseCSCommand)) // Adjust this if your BaseCSCommand is in a different assembly
             .GetTypes()
-            .Where(t => t.IsSubclassOf(typeof(BaseCommand)) && !t.IsAbstract);
+            .Where(t => t.IsSubclassOf(typeof(BaseCSCommand)) && !t.IsAbstract);
 
         string finalStr = "";
         int i = 0;
@@ -37,7 +37,7 @@ public class HelpCommand : BaseCommand
         foreach (Type type in commandTypes)
         {
             // Create an instance of the command type
-            BaseCommand commandInstance = (BaseCommand)Activator.CreateInstance(type);
+            BaseCSCommand commandInstance = (BaseCSCommand)Activator.CreateInstance(type);
 
             // Print the command's description
             finalStr += ">>> " + commandInstance.GetCommandUsageEx() + "\n<color=#949494>" + commandInstance.GetCommandDescription() + "</color>";

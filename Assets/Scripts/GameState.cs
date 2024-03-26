@@ -8,6 +8,7 @@ public struct GameFile
     public string FileName;
     public string FileContents;
     public bool IsOpen;
+   
     public GameFile(string fileName, string fileContents = "")
     {
         FileName = fileName;
@@ -39,6 +40,11 @@ public struct GameFile
         }
         return true;
     }
+
+    // Equals comparisons simply checks against `FileName`, since names are unique.
+    public readonly override bool Equals(object obj) => FileName == ((GameFile)obj).FileName;
+    public readonly override int GetHashCode() => base.GetHashCode();
+
 }
 
 public static class GameState

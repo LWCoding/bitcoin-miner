@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Status
+public enum CSStatus
 {
     OK = 0, ERROR = 1
 }
 
-public struct InterpreterResponse
+public struct CSInterpreterResponse
 {
     public string text;  // Contains text to print to console
-    public Status status;  // Contains status of response
+    public CSStatus status;  // Contains status of response
 }
 
 public class CSInterpreter
@@ -20,11 +20,11 @@ public class CSInterpreter
     /// Given a string input `text` to evaluate, tokenizes and
     /// renders the appropriate command.
     /// </summary>
-    public InterpreterResponse Interpret(string text)
+    public CSInterpreterResponse Interpret(string text)
     {
         // Prepare the response variable.
-        InterpreterResponse res = new();
-        BaseCommand commandToExec = null;
+        CSInterpreterResponse res = new();
+        BaseCSCommand commandToExec = null;
 
         // Parse the incoming text.
         text = text.Trim();  // Trim any leading whitespace
@@ -36,30 +36,38 @@ public class CSInterpreter
         switch (cmd)
         {
             case "help":
-                commandToExec = new HelpCommand();
+                commandToExec = new HelpCSCommand();
                 break;
             case "click":
             case "mine":
-                commandToExec = new ClickCommand();
+                commandToExec = new ClickCSCommand();
                 break;
             case "create":
-                commandToExec = new CreateCommand();
+                commandToExec = new CreateCSCommand();
                 break;
             case "list":
             case "ls":
-                commandToExec = new ListCommand();
+                commandToExec = new ListCSCommand();
                 break;
             case "delete":
             case "del":
-            case "close":
-                commandToExec = new DeleteCommand();
+                commandToExec = new DeleteCSCommand();
                 break;
             case "open":
-                commandToExec = new OpenCommand();
+                commandToExec = new OpenCSCommand();
+                break;
+            case "run":
+                commandToExec = new ExecuteCSCommand();
+                break;
+            case "cat":
+                commandToExec = new CatCSCommand();
+                break;
+            case "close":
+                commandToExec = new CloseCSCommand();
                 break;
             default:
                 res.text = "Invalid command specified";
-                res.status = Status.ERROR;  // If not identified, ERROR
+                res.status = CSStatus.ERROR;  // If not identified, ERROR
                 break;
         }
 

@@ -11,42 +11,79 @@ public class FileWindowHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
     [SerializeField] private TextMeshProUGUI _windowFileName;
     [SerializeField] private TMP_InputField _windowFileContents;
 
-    private GameFile _currentFileInfo;  // Cached info for current instance's file
+    public GameFile CurrentFileInfo;  // Cached info for current instance's file
 
-    private Vector3 mouseOffset;
+    private Vector3 _mouseOffset;
+    private Camera _mainCamera;
+    private RectTransform _rectTransform;
+
+    private void Awake()
+    {
+        _mainCamera = Camera.main;
+        _rectTransform = GetComponent<RectTransform>();
+    }
 
     public void Initialize(GameFile gf)
     {
         _windowFileName.text = gf.FileName;
         _windowFileContents.text = gf.FileContents;
-        _currentFileInfo = gf;
+        CurrentFileInfo = gf;
         StartCoroutine(ShowCoroutine());
     }
 
-    public void CloseFileWindow()
+    public void SaveFileContents()
     {
-        int idx = GameState.CreatedFiles.FindIndex((gf) => gf.FileName == _currentFileInfo.FileName);
+        int idx = GameState.CreatedFiles.FindIndex((gf) => gf.FileName == CurrentFileInfo.FileName);
         // Save contents of the file
         GameFile currFile = GameState.CreatedFiles[idx];
         currFile.FileContents = _windowFileContents.text;
         GameState.CreatedFiles[idx] = currFile;
-        // Close the window
+    }
+
+    public void CloseFileWindow()
+    {
+        int idx = GameState.CreatedFiles.FindIndex((gf) => gf.FileName == CurrentFileInfo.FileName);
         WindowManager.Instance.CloseFileWindow(idx);
+    }
+
+    public void DestroyWindow()
+    {
+        SaveFileContents();
         Destroy(gameObject);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        Vector2 sizeDelta = GetComponent<RectTransform>().sizeDelta;
-        Vector2 newPos = Input.mousePosition + mouseOffset;
-        newPos = new (Mathf.Clamp(newPos.x, 0, Screen.width - sizeDelta.x), 
-                      Mathf.Clamp(newPos.y, sizeDelta.y, Screen.height));
-        transform.position = newPos;
+        Vector2 newPos = _mainCamera.ScreenToWorldPoint(Input.mousePosition) + _mouseOffset;
+
+        // Calculate the screen bounds
+        float minX = _mainCamera.ScreenToWorldPoint(new Vector3(0, 0, 0)).x;
+        float maxX = _mainCamera.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
+        float minY = _mainCamera.ScreenToWorldPoint(new Vector3(0, 0, 0)).y;
+        float maxY = _mainCamera.ScreenToWorldPoint(new Vector3(0, Screen.height, 0)).y;
+
+        // Get the object's size
+        Vector2 size = _rectTransform.sizeDelta * _rectTransform.lossyScale;
+
+        // Calculate the bounds within which the object's center can move
+        float allowedMinX = minX;
+        float allowedMaxX = maxX - size.x;
+        float allowedMinY = minY + size.y;
+        float allowedMaxY = maxY;
+
+        // Clamp the new position to these bounds
+        Vector2 clampedPosition = new(
+            Mathf.Clamp(newPos.x, allowedMinX, allowedMaxX),
+            Mathf.Clamp(newPos.y, allowedMinY, allowedMaxY)
+        );
+
+        // Apply the clamped position
+        transform.position = clampedPosition;
     }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        mouseOffset = transform.position - Input.mousePosition;
+        _mouseOffset = transform.position - _mainCamera.ScreenToWorldPoint(Input.mousePosition);
     }
 
     private IEnumerator ShowCoroutine()

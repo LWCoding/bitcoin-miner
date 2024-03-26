@@ -50,15 +50,15 @@ public class CSTextManager : MonoBehaviour
         _consoleInput.Select();  // Reselect the console input
         GameObject textObj = Instantiate(_consoleTextPrefab, _consoleTextParent);
         textObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cmd;  // Child object has actual text
-        InterpreterResponse res = _interpreter.Interpret(cmd);
+        CSInterpreterResponse res = _interpreter.Interpret(cmd);
         // If we have an error, send that message out!
-        if (res.status == Status.ERROR)
+        if (res.status == CSStatus.ERROR)
         {
             AnnounceInConsole("Error when running command", "red");
         }
         if (res.text != "")
         {
-            AnnounceInConsole(res.text, (res.status == Status.OK) ? "green" : "red");
+            AnnounceInConsole(res.text, (res.status == CSStatus.OK) ? "green" : "red");
         }
     }
 

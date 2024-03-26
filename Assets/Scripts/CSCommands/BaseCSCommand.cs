@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BaseCommand
+public abstract class BaseCSCommand
 {
 
     public abstract string GetCommandUsageEx();  // Ex: help [arg1] [arg2]
@@ -15,6 +15,6 @@ public abstract class BaseCommand
     /// </summary>
     /// <param name="args">Arguments to pass into the function.</param>
     /// <param name="res">Response, passed in by reference, to modify.</param>
-    public abstract void RunCommand(List<string> args, ref InterpreterResponse res);
+    public abstract void RunCommand(List<string> args, ref CSInterpreterResponse res);
 
 }

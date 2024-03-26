@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class ListCommand : BaseCommand
+public class ListCSCommand : BaseCSCommand
 {
 
     public override string GetCommandUsageEx() => "ls";
     public override string GetCommandDescription() =>
 @"Lists all of the files in the current directory.";
 
-    public override void RunCommand(List<string> args, ref InterpreterResponse res)
+    public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {
         List(ref res);
     }
 
-    private void List(ref InterpreterResponse res)
+    private void List(ref CSInterpreterResponse res)
     {
         string resText = "";
 
@@ -27,7 +27,7 @@ public class ListCommand : BaseCommand
         }
 
         res.text = (resText == "") ? "No files in current directory" : resText;
-        res.status = Status.OK;
+        res.status = CSStatus.OK;
     }
 
 }
