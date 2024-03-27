@@ -36,7 +36,7 @@ public class OpenCSCommand : BaseCSCommand
             res.status = CSStatus.ERROR;
             return;
         }
-        WindowManager.Instance.OpenFileWindow(idx);  // Open the file
+        WindowManager.Instance.OpenWindow(idx);  // Open the file
         res.text = "Opened file '" + fileName + "' successfully";
         res.status = CSStatus.OK;
     }

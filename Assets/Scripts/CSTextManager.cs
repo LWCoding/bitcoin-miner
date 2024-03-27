@@ -41,6 +41,10 @@ public class CSTextManager : MonoBehaviour
         if (!inputEnabled)
         {
             StartCoroutine(UnselectSelectedGameObject());
+        } else
+        {
+            // If enabling, focus the player's input.
+            TryFocusInput();
         }
     }
 

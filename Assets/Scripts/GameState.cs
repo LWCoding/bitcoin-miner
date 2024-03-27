@@ -3,20 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+public enum FileType { 
+    FILE = 0, SHOP = 1
+}
+
 public struct GameFile
 {
     public string FileName;
     public string FileContents;
     public bool IsOpen;
     public bool IsDeleteable;
+    public FileType FileType;
 
-
-    public GameFile(string fileName, string fileContents = "", bool canBeDeleted = true)
+    public GameFile(string fileName, string fileContents = "", bool canBeDeleted = true, FileType type = FileType.FILE)
     {
         FileName = fileName;
         FileContents = fileContents;
         IsOpen = false;
         IsDeleteable = canBeDeleted;
+        FileType = type;
     }
     public static bool IsValidFileName(string fileName)
     {
@@ -70,7 +75,7 @@ public static class GameState
         set
         {
             _commandsRun = value;
-            OnChangeCommandsRun.Invoke(value);
+            OnChangeCommandsRun?.Invoke(value);
         }
     }
 

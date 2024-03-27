@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class ClickCSCommand : BaseCSCommand
 {
@@ -10,7 +11,7 @@ public class ClickCSCommand : BaseCSCommand
 @"Mines bitcoin. Adds it to your persistent wallet.";
     public override int GetPermissionReq() => 0;
 
-    private readonly Random _random = new();
+    private readonly System.Random _random = new();
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {

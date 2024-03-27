@@ -93,7 +93,7 @@ public class CSDialogueScripter : MonoBehaviour
                     GameState.PermissionCount++;
                     break;
                 case DialogueEvent.CREATE_SHOP_FILE:
-                    GameFile shopFile = new GameFile("bt.shop", "", false);
+                    GameFile shopFile = new("btc.shop", "", false, FileType.SHOP);
                     GameState.CreatedFiles.Add(shopFile);
                     break;
             }

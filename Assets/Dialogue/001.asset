@@ -24,19 +24,15 @@ MonoBehaviour:
     SendInstantly: 0
     EventToPlayAfter: 0
   - DelayBefore: 2
-    Text: Though, typing all that can be a pain. So we use  utility extensions to
+    Text: Though, typing all that can be a pain. So we use utility extensions to
       make the process easier.
     Color: red
     SendInstantly: 0
-    EventToPlayAfter: 0
+    EventToPlayAfter: 2
   - DelayBefore: 2
     Text: Of course, I'm not sharing any of mine. Instead, I'll give you access to
-      the virtual shop. You can go there to streamline your process.
+      the virtual shop. You can go there to make mining more convenient. Check your
+      files.
     Color: red
     SendInstantly: 0
-    EventToPlayAfter: 0
-  - DelayBefore: 1
-    Text: '[FILE CREATED IN WORKING DIRECTORY BY THIRD-PARTY CONNECTION]'
-    Color: green
-    SendInstantly: 1
     EventToPlayAfter: 3

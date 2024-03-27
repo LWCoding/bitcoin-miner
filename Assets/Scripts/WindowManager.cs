@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WindowManager : MonoBehaviour
@@ -8,11 +9,12 @@ public class WindowManager : MonoBehaviour
     public static WindowManager Instance;
 
     [Header("Prefab Assignments")]
-    [SerializeField] private GameObject _windowPrefab;
+    [SerializeField] private GameObject _fileWindowPrefab;
+    [SerializeField] private GameObject _shopWindowPrefab;
     [Header("Object Assignments")]
     [SerializeField] private Transform _windowParentTransform;
 
-    private List<FileWindowHandler> _openWindowHandlers = new();
+    private List<WindowHandler> _openWindowHandlers = new();
 
     private void Awake()
     {
@@ -27,13 +29,22 @@ public class WindowManager : MonoBehaviour
     /// Given a GameFile, displays its window onto the
     /// screen and marks it as open.
     /// </summary>
-    public void OpenFileWindow(int gfIndex)
+    public void OpenWindow(int gfIndex)
     {
         GameFile currFile = GameState.CreatedFiles[gfIndex];
         currFile.IsOpen = true;
         GameState.CreatedFiles[gfIndex] = currFile;
-        GameObject windowObj = Instantiate(_windowPrefab, _windowParentTransform);
-        windowObj.GetComponent<FileWindowHandler>().Initialize(currFile);
+        GameObject windowObj = null;
+        // Open different window depending on file type
+        switch (currFile.FileType) {
+            case FileType.FILE:
+                windowObj = Instantiate(_fileWindowPrefab, _windowParentTransform);
+                break;
+            case FileType.SHOP:
+                windowObj = Instantiate(_shopWindowPrefab, _windowParentTransform);
+                break;
+        }
+        windowObj.GetComponent<WindowHandler>().Initialize(currFile);
         _openWindowHandlers.Add(windowObj.GetComponent<FileWindowHandler>());
     }
 
@@ -50,9 +61,13 @@ public class WindowManager : MonoBehaviour
 
     public void SaveAllFileContents()
     {
-        foreach (FileWindowHandler window in _openWindowHandlers)
+        foreach (WindowHandler window in _openWindowHandlers)
         {
-            window.SaveFileContents();
+            // Save file contents for all FileWindowHandlers
+            if (window is FileWindowHandler fileWindow)
+            {
+                fileWindow.SaveFileContents();
+            }
         }
     }
 

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueLines:
   - DelayBefore: 0.5
-    Text: '[UNKNOWN SECURE CONNECTION ESTABLISHED]'
+    Text: '[UNKNOWN SECURE THIRD-PARTY CONNECTION ESTABLISHED]'
     Color: yellow
     SendInstantly: 1
     EventToPlayAfter: 0
@@ -31,8 +31,8 @@ MonoBehaviour:
     EventToPlayAfter: 0
   - DelayBefore: 2
     Text: 'In three days, my special malware will wipe every single file on your
-      computer... If you want to see your precious files again, send 1,500 bitcoin
-      to: 1PMycafql<<<cnJaafv<<<SqwwJqjafasdv0<<<<<FUCK<<<<wXBErnLsZ7RkXUAs.'
+      computer... If you want to see your precious files again, send 1000<<<200<<<1500
+      bitcoin to: 1PMycafql<<<cnJaafv<<<SqwwJqjafasdv0<<<<<FUCK<<<<wXBErnLsZ7RkXUAs.'
     Color: red
     SendInstantly: 0
     EventToPlayAfter: 0
@@ -41,13 +41,13 @@ MonoBehaviour:
     Color: white
     SendInstantly: 0
     EventToPlayAfter: 1
-  - DelayBefore: 0
-    Text: 'C:\\Users\\User: 0.00000.'
+  - DelayBefore: 0.2
+    Text: 'C:\Users\User: 0.00000 BTC.'
     Color: green
     SendInstantly: 1
     EventToPlayAfter: 0
   - DelayBefore: 4
-    Text: ...Hm. Looks like your computer is actually super useless. Zero bitcoin.
+    Text: ...Hm. Your wallet is actually super useless. Zero bitcoin.
     Color: red
     SendInstantly: 0
     EventToPlayAfter: 0
