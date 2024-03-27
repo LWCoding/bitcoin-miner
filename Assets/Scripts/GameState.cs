@@ -7,6 +7,7 @@ public enum FileType {
     FILE = 0, SHOP = 1
 }
 
+[System.Serializable]
 public struct GameFile
 {
     public string FileName;

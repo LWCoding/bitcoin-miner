@@ -14,7 +14,7 @@ public class WindowManager : MonoBehaviour
     [Header("Object Assignments")]
     [SerializeField] private Transform _windowParentTransform;
 
-    private List<WindowHandler> _openWindowHandlers = new();
+    private readonly List<WindowHandler> _openWindowHandlers = new();
 
     private void Awake()
     {
@@ -45,7 +45,7 @@ public class WindowManager : MonoBehaviour
                 break;
         }
         windowObj.GetComponent<WindowHandler>().Initialize(currFile);
-        _openWindowHandlers.Add(windowObj.GetComponent<FileWindowHandler>());
+        _openWindowHandlers.Add(windowObj.GetComponent<WindowHandler>());
     }
 
     public void CloseFileWindow(int gfIndex)
