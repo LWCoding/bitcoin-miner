@@ -1504,6 +1504,8 @@ GameObject:
   - component: {fileID: 1950202349}
   - component: {fileID: 1950202350}
   - component: {fileID: 1950202351}
+  - component: {fileID: 1950202352}
+  - component: {fileID: 1950202353}
   m_Layer: 0
   m_Name: Main Scripts
   m_TagString: Untagged
@@ -1569,6 +1571,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _moneyText: {fileID: 1218195212}
+--- !u!114 &1950202352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950202347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90087cbd70ed0fe44a10ec6847f002e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _csTextManager: {fileID: 1950202349}
+  _dialogueToPlayAtStart: {fileID: 11400000, guid: a05ef5b764b98a3448b40997aab20d02, type: 2}
+--- !u!114 &1950202353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950202347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 915a4727270804e4bb273836c48412f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  applicationID: 1222361244762374254
+  largeImage: thumbnail
+  largeText: Bitcoin Miner
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

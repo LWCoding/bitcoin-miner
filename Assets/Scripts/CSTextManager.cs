@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.EventSystems;
 
 public class CSTextManager : MonoBehaviour
 {
@@ -22,20 +23,34 @@ public class CSTextManager : MonoBehaviour
         _consoleInput.Select();
     }
 
-    private void Start()
+    //private void Start()
+    //{
+    //    AnnounceInConsole("Welcome, user. Type <b>help</b> for assistance.", "green");
+    //}
+
+    /// <summary>
+    /// Toggles whether the user can type something into the console.
+    /// </summary>
+    public void ToggleConsoleInput(bool inputEnabled)
     {
-        AnnounceInConsole("Welcome, user. Type <b>help</b> for assistance.", "green");
+        _consoleInput.interactable = inputEnabled;
+        // If disabling, make sure the user isn't selecting the input field
+        if (!inputEnabled)
+        {
+            EventSystem.current.SetSelectedGameObject(null);
+        }
     }
 
     /// <summary>
     /// Sends a non-user generated message in the console. Color
     /// can be optionally adjusted.
     /// </summary>
-    public void AnnounceInConsole(string text, string color = "white")
+    public TextMeshProUGUI AnnounceInConsole(string text, string color = "white")
     {
         GameObject textObj = Instantiate(_adminConsoleTextPrefab, _consoleTextParent);
         string textToSend = "<color=\"" + color + "\">" + text + "</color>";
         textObj.GetComponent<TextMeshProUGUI>().text = textToSend;
+        return textObj.GetComponent<TextMeshProUGUI>();
     }
 
     /// <summary>
