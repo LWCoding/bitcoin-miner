@@ -16,17 +16,20 @@ public class CSTextManager : MonoBehaviour
 
     private readonly CSInterpreter _interpreter = new();
 
+    private void TryFocusInput()
+    {
+        if (_consoleInput.interactable)
+        {
+            _consoleInput.ActivateInputField();
+            _consoleInput.Select();  // Reselect the console input
+        }
+    }
+
     private void Awake()
     {
         _consoleInput.onSubmit.AddListener((s) => SubmitTextToConsole(s));
-        _consoleInput.ActivateInputField();
-        _consoleInput.Select();
+        TryFocusInput();
     }
-
-    //private void Start()
-    //{
-    //    AnnounceInConsole("Welcome, user. Type <b>help</b> for assistance.", "green");
-    //}
 
     /// <summary>
     /// Toggles whether the user can type something into the console.
@@ -37,7 +40,7 @@ public class CSTextManager : MonoBehaviour
         // If disabling, make sure the user isn't selecting the input field
         if (!inputEnabled)
         {
-            EventSystem.current.SetSelectedGameObject(null);
+            StartCoroutine(UnselectSelectedGameObject());
         }
     }
 
@@ -61,8 +64,7 @@ public class CSTextManager : MonoBehaviour
     {
         if (_consoleInput.text == "") return;
         _consoleInput.text = "";  // Reset text
-        _consoleInput.ActivateInputField();
-        _consoleInput.Select();  // Reselect the console input
+        TryFocusInput();
         GameObject textObj = Instantiate(_consoleTextPrefab, _consoleTextParent);
         textObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cmd;  // Child object has actual text
         CSInterpreterResponse res = _interpreter.Interpret(cmd);
@@ -75,6 +77,12 @@ public class CSTextManager : MonoBehaviour
         {
             AnnounceInConsole(res.text, (res.status == CSStatus.OK) ? "green" : "red");
         }
+    }
+
+    private IEnumerator UnselectSelectedGameObject()
+    {
+        yield return new WaitForEndOfFrame();
+        EventSystem.current.SetSelectedGameObject(null);
     }
 
 }
