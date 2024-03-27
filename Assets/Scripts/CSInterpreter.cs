@@ -72,7 +72,7 @@ public class CSInterpreter
         }
 
         // If we don't have valid permissions, stop the user now
-        if (GameState.PermissionCount < commandToExec.GetPermissionReq())
+        if (commandToExec != null && GameState.PermissionCount < commandToExec.GetPermissionReq())
         {
             res.text = "You do not have permission to run this command"; 
             res.status = CSStatus.ERROR;
