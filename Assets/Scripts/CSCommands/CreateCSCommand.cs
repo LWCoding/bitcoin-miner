@@ -8,6 +8,7 @@ public class CreateCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "create [filename]";
     public override string GetCommandDescription() =>
 @"Creates a new file in your root directory.";
+    public override int GetPermissionReq() => 1;
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {

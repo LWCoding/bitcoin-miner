@@ -7,6 +7,7 @@ public abstract class BaseCSCommand
 
     public abstract string GetCommandUsageEx();  // Ex: help [arg1] [arg2]
     public abstract string GetCommandDescription();
+    public abstract int GetPermissionReq();  // Permission count required to run
 
     /// <summary>
     /// This command should run the command dictated by the

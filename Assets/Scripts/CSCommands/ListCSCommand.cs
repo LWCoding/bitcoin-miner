@@ -9,6 +9,7 @@ public class ListCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "ls";
     public override string GetCommandDescription() =>
 @"Lists all of the files in the current directory.";
+    public override int GetPermissionReq() => 0;
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {

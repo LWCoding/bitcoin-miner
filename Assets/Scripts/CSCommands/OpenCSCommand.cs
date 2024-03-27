@@ -7,6 +7,7 @@ public class OpenCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "open [filename]";
     public override string GetCommandDescription() =>
 @"Opens a created file in the current directory.";
+    public override int GetPermissionReq() => 0;
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {

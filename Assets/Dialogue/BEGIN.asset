@@ -14,19 +14,63 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DialogueLines:
   - DelayBefore: 0.5
-    Text: '[SECURE CONNECTION ESTABLISHED]'
+    Text: '[UNKNOWN SECURE CONNECTION ESTABLISHED]'
     Color: yellow
     SendInstantly: 1
+    EventToPlayAfter: 0
   - DelayBefore: 1.5
-    Text: Your computer's files are now mine. Please wire $1,500 USD to @nikolai138
-      if you want a chance of seeing your precious files again.
+    Text: ...Hello. It's a pleasure to meet you. :)
     Color: red
     SendInstantly: 0
-  - DelayBefore: 1.5
-    Text: can i? can i?
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: You might be wondering what you're looking at. Welcome to your computer's
+      terminal screen! Don't bother quitting out. You're now stuck here forever.
     Color: red
     SendInstantly: 0
-  - DelayBefore: 1.5
-    Text: can i? can i?
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: 'In three days, my special malware will wipe every single file on your
+      computer... If you want to see your precious files again, send 1,500 bitcoin
+      to: 1PMycafql<<<cnJaafv<<<SqwwJqjafasdv0<<<<<FUCK<<<<wXBErnLsZ7RkXUAs.'
     Color: red
     SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: sudo print<<<<<post btcvalue -o FILE_STDIN<<OUT
+    Color: white
+    SendInstantly: 0
+    EventToPlayAfter: 1
+  - DelayBefore: 0
+    Text: 'C:\\Users\\User: 0.00000.'
+    Color: green
+    SendInstantly: 1
+    EventToPlayAfter: 0
+  - DelayBefore: 4
+    Text: ...Hm. Looks like your computer is actually super useless. Zero bitcoin.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: Lucky for you, I'll take whatever I can get. And judging by these files
+      I've seen... you'll do anything to restore your computer.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: I'll teach you the basics of bitcoin mining. Once you've earned enough,
+      I'll take it as your payment.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: First, here's some limited access to some terminal commands. Try them out.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 1
+    Text: YOU HAVE BEEN GRANTED `TEST_0001` PERMISSIONS. Type <b>help</b> to see
+      all available commands.
+    Color: green
+    SendInstantly: 1
+    EventToPlayAfter: 0

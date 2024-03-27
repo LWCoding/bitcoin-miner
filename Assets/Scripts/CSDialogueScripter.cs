@@ -22,7 +22,7 @@ public class CSDialogueScripter : MonoBehaviour
         {
             Destroy(this);
         }
-        Instance = null;
+        Instance = this;
     }
 
     private void Start()
@@ -50,19 +50,53 @@ public class CSDialogueScripter : MonoBehaviour
 
             // Procedurally display the text
             string currText = "";
-            while (currText.Length != next.Text.Length)
+            string renderedText = "";
+            while (renderedText.Length != next.Text.Length)
             {
-                currText = next.Text[..(currText.Length + 1)];
+                char nextChar = next.Text[renderedText.Length];
+                renderedText += nextChar;
+                if (nextChar == '<')
+                {
+                    // For backspace char, remove a character
+                    currText = currText[..(currText.Length - 1)];
+                    yield return new WaitForSeconds(0.06f);  // Wait a bit too so it's natural
+                } else
+                {
+                    // Or else, add the character
+                    currText += nextChar;
+                }
                 _text.text = "<color=\"" + next.Color + "\">" + currText + "</color>";
-                if (currText.Length != next.Text.Length)
+                if (renderedText.Length != next.Text.Length)
                 {
                     _text.text += "|";
+                }
+                // For punctuation, wait slightly longer
+                if (nextChar == '.' || nextChar == '!')
+                {
+                    yield return new WaitForSeconds(0.2f);
                 }
                 yield return new WaitForSeconds(0.06f);
             }
         } else
         {
             _csTextManager.AnnounceInConsole(next.Text, next.Color);
+        }
+
+        if (next.EventToPlayAfter != DialogueEvent.NONE)
+        {
+            switch (next.EventToPlayAfter)
+            {
+                case DialogueEvent.SHOW_BITCOIN_COUNT:
+                    CSMoneyUpdater.Instance.ToggleTextVisibility(true);
+                    break;
+                case DialogueEvent.UPGRADE_PERMISSIONS:
+                    GameState.PermissionCount++;
+                    break;
+                case DialogueEvent.CREATE_SHOP_FILE:
+                    GameFile shopFile = new GameFile("bt.shop", "", false);
+                    GameState.CreatedFiles.Add(shopFile);
+                    break;
+            }
         }
 
         if (_dialogueQueue.Count == 0) {

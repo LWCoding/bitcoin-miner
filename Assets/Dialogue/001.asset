@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08648af9636680a40b2f2f0a7edd7ad5, type: 3}
+  m_Name: 001
+  m_EditorClassIdentifier: 
+  DialogueLines:
+  - DelayBefore: 0
+    Text: '[INPUT LOCKED BY THIRD-PARTY CONNECTION]'
+    Color: yellow
+    SendInstantly: 1
+    EventToPlayAfter: 0
+  - DelayBefore: 1
+    Text: Nice. It looks like you're getting the hang of things.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: Though, typing all that can be a pain. So we use  utility extensions to
+      make the process easier.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 2
+    Text: Of course, I'm not sharing any of mine. Instead, I'll give you access to
+      the virtual shop. You can go there to streamline your process.
+    Color: red
+    SendInstantly: 0
+    EventToPlayAfter: 0
+  - DelayBefore: 1
+    Text: '[FILE CREATED IN WORKING DIRECTORY BY THIRD-PARTY CONNECTION]'
+    Color: green
+    SendInstantly: 1
+    EventToPlayAfter: 3

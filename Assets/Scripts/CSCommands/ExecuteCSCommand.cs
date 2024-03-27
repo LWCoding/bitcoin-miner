@@ -9,6 +9,7 @@ public class ExecuteCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "run [filename]";
     public override string GetCommandDescription() =>
 @"Interprets a file as an executable, running any code inside.";
+    public override int GetPermissionReq() => 1;
 
     private readonly FileInterpreter _fileInterpreter = new();
 

@@ -10,6 +10,7 @@ public class HelpCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "help";
     public override string GetCommandDescription() =>
 @"Displays this help desk.";
+    public override int GetPermissionReq() => 0;
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {
@@ -38,6 +39,12 @@ public class HelpCSCommand : BaseCSCommand
         {
             // Create an instance of the command type
             BaseCSCommand commandInstance = (BaseCSCommand)Activator.CreateInstance(type);
+
+            // Check if we meet the command's requirements
+            if (GameState.PermissionCount < commandInstance.GetPermissionReq())
+            {
+                continue;
+            }
 
             // Print the command's description
             finalStr += ">>> " + commandInstance.GetCommandUsageEx() + "\n<color=#949494>" + commandInstance.GetCommandDescription() + "</color>";

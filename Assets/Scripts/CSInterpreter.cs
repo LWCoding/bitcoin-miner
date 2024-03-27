@@ -66,13 +66,23 @@ public class CSInterpreter
                 commandToExec = new CloseCSCommand();
                 break;
             default:
-                res.text = "Invalid command specified";
+                res.text = "Unknown command. For a full list of commands, type <b>help</b>";
                 res.status = CSStatus.ERROR;  // If not identified, ERROR
                 break;
         }
 
+        // If we don't have valid permissions, stop the user now
+        if (GameState.PermissionCount < commandToExec.GetPermissionReq())
+        {
+            res.text = "You do not have permission to run this command"; 
+            res.status = CSStatus.ERROR;
+            return res;
+        }
+
         // Run the command and return response afterwards.
         commandToExec?.RunCommand(tokens, ref res);
+
+        GameState.CommandsRun++;  // Increment number of commands run
 
         return res;
     }

@@ -8,12 +8,15 @@ public struct GameFile
     public string FileName;
     public string FileContents;
     public bool IsOpen;
-   
-    public GameFile(string fileName, string fileContents = "")
+    public bool IsDeleteable;
+
+
+    public GameFile(string fileName, string fileContents = "", bool canBeDeleted = true)
     {
         FileName = fileName;
         FileContents = fileContents;
         IsOpen = false;
+        IsDeleteable = canBeDeleted;
     }
     public static bool IsValidFileName(string fileName)
     {
@@ -60,7 +63,21 @@ public static class GameState
         }
     }
 
+    private static int _commandsRun = 0;
+    public static int CommandsRun
+    {
+        get => _commandsRun;
+        set
+        {
+            _commandsRun = value;
+            OnChangeCommandsRun.Invoke(value);
+        }
+    }
+
+    public static int PermissionCount = 0;  // Dictates what commands the user can call
+
     public static Action<float> OnChangeBitcoin = null;  // Calls when clicks are set
+    public static Action<int> OnChangeCommandsRun = null;  // Calls when commands are run
 
     public static List<GameFile> CreatedFiles = new();  // Empty list to hold created files
     public const int FILENAME_MAX_LENGTH = 12;  // Max name length of any file

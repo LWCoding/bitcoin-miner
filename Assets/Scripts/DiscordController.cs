@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class DiscordController : MonoBehaviour
 {
@@ -50,7 +49,7 @@ public class DiscordController : MonoBehaviour
         {
             string details, currState;
             currState = "Getting rich, quick!";
-            details = "Balance: " + GameState.Clicks.ToString("F5") + " BC";
+            details = "Balance: " + GameState.Clicks.ToString("F5") + " BTC";
             var activityManager = discord.GetActivityManager();
             var activity = new Discord.Activity
             {

@@ -8,6 +8,7 @@ public class CatCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "cat [filename]";
     public override string GetCommandDescription() =>
 @"Prints out all specified file contents to the console.";
+    public override int GetPermissionReq() => 1;
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {

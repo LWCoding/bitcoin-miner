@@ -7,6 +7,7 @@ public class CloseCSCommand : BaseCSCommand
     public override string GetCommandUsageEx() => "close [filename]";
     public override string GetCommandDescription() =>
 @"Closes the window of a currently opened file.";
+    public override int GetPermissionReq() => 1;
 
     public override void RunCommand(List<string> args, ref CSInterpreterResponse res)
     {
