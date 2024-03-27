@@ -31,7 +31,7 @@ MonoBehaviour:
     EventToPlayAfter: 0
   - DelayBefore: 2
     Text: 'In three days, my special malware will wipe every single file on your
-      computer... If you want to see your precious files again, send 1000<<<200<<<1500
+      computer... If you want to see your precious files again, send 1000<<<200<<<500
       bitcoin to: 1PMycafql<<<cnJaafv<<<SqwwJqjafasdv0<<<<<FUCK<<<<wXBErnLsZ7RkXUAs.'
     Color: red
     SendInstantly: 0
