@@ -42,7 +42,7 @@ public class CSDialogueScripter : MonoBehaviour
     private IEnumerator RenderAllDialogueInQueue()
     {
         DialogueLine next = _dialogueQueue.Dequeue();
-        yield return new WaitForSeconds(next.DelayBefore);
+        yield return WaitForSecondsIfNotSkipping(next.DelayBefore);
 
         if (!next.SendInstantly)
         {
@@ -59,7 +59,7 @@ public class CSDialogueScripter : MonoBehaviour
                 {
                     // For backspace char, remove a character
                     currText = currText[..(currText.Length - 1)];
-                    yield return new WaitForSeconds(0.06f);  // Wait a bit too so it's natural
+                    yield return WaitForSecondsIfNotSkipping(0.06f);  // Wait a bit too so it's natural
                 } else
                 {
                     // Or else, add the character
@@ -73,9 +73,9 @@ public class CSDialogueScripter : MonoBehaviour
                 // For punctuation, wait slightly longer
                 if (nextChar == '.' || nextChar == '!')
                 {
-                    yield return new WaitForSeconds(0.2f);
+                    yield return WaitForSecondsIfNotSkipping(0.2f);
                 }
-                yield return new WaitForSeconds(0.06f);
+                yield return WaitForSecondsIfNotSkipping(0.06f);
             }
         } else
         {
@@ -105,6 +105,16 @@ public class CSDialogueScripter : MonoBehaviour
         {
             StartCoroutine(RenderAllDialogueInQueue());  // Continue rendering if not empty
         }
+    }
+
+    private WaitForSeconds WaitForSecondsIfNotSkipping(float seconds)
+    {
+        // Left shift can be pressed to skip dialogue wait times
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            return new WaitForSeconds(0);
+        }
+        return new WaitForSeconds(seconds);
     }
 
 }
