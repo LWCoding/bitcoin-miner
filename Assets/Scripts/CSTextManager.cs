@@ -7,9 +7,6 @@ using UnityEngine.EventSystems;
 public class CSTextManager : MonoBehaviour
 {
 
-    [Header("Prefab Assignments")]
-    [SerializeField] private GameObject _consoleTextPrefab;
-    [SerializeField] private GameObject _adminConsoleTextPrefab;
     [Header("Object Assignments")]
     [SerializeField] private TMP_InputField _consoleInput;
     [SerializeField] private Transform _consoleTextParent;
@@ -54,7 +51,7 @@ public class CSTextManager : MonoBehaviour
     /// </summary>
     public TextMeshProUGUI AnnounceInConsole(string text, string color = "white")
     {
-        GameObject textObj = Instantiate(_adminConsoleTextPrefab, _consoleTextParent);
+        GameObject textObj = ObjectFactory.Instance.GetPooledObject(PoolableType.CS_ADMIN_TEXT, _consoleTextParent); 
         string textToSend = "<color=\"" + color + "\">" + text + "</color>";
         textObj.GetComponent<TextMeshProUGUI>().text = textToSend;
         return textObj.GetComponent<TextMeshProUGUI>();
@@ -69,7 +66,7 @@ public class CSTextManager : MonoBehaviour
         if (_consoleInput.text == "") return;
         _consoleInput.text = "";  // Reset text
         TryFocusInput();
-        GameObject textObj = Instantiate(_consoleTextPrefab, _consoleTextParent);
+        GameObject textObj = ObjectFactory.Instance.GetPooledObject(PoolableType.CS_USER_TEXT, _consoleTextParent);
         textObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cmd;  // Child object has actual text
         CSInterpreterResponse res = _interpreter.Interpret(cmd);
         // If we have an error, send that message out!

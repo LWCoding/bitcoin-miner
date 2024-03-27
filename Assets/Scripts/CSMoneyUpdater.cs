@@ -9,8 +9,6 @@ public class CSMoneyUpdater : MonoBehaviour
 
     public static CSMoneyUpdater Instance;
 
-    [Header("Prefab Assignments")]
-    [SerializeField] private GameObject _bitcoinPrefab;
     [Header("Object Assignments")]
     [SerializeField] private Transform _bitcoinCanvasTransform;
     [SerializeField] private TextMeshProUGUI _moneyText;
@@ -57,18 +55,18 @@ public class CSMoneyUpdater : MonoBehaviour
     {
         yield return new WaitForSeconds(waitBefore);
         Vector3 finalPos = _moneyText.transform.position;
-        GameObject _btcObject = Instantiate(_bitcoinPrefab, _bitcoinCanvasTransform);
-        _btcObject.transform.position = startPos;
+        GameObject btcObject = ObjectFactory.Instance.GetPooledObject(PoolableType.MONEY_PARTICLE, _bitcoinCanvasTransform);
+        btcObject.transform.position = startPos;
         float currTime = 0;
         float timeToWait = 0.7f;
         yield return new WaitForSeconds(0.2f);
         while (currTime < timeToWait)
         {
             currTime += Time.deltaTime;
-            _btcObject.transform.position = Vector3.Lerp(startPos, finalPos, currTime / timeToWait);
+            btcObject.transform.position = Vector3.Lerp(startPos, finalPos, currTime / timeToWait);
             yield return null;
         }
-        Destroy(_btcObject);
+        ObjectFactory.Instance.ReturnObjectToPool(btcObject, PoolableType.MONEY_PARTICLE);
     }
 
 }

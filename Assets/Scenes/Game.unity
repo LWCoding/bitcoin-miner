@@ -1507,6 +1507,7 @@ GameObject:
   - component: {fileID: 1950202352}
   - component: {fileID: 1950202353}
   - component: {fileID: 1950202354}
+  - component: {fileID: 1950202355}
   m_Layer: 0
   m_Name: Main Scripts
   m_TagString: Untagged
@@ -1541,8 +1542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae69f054ead3cf4eb410e5963137852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _consoleTextPrefab: {fileID: 1494178902477216639, guid: fda57f18519156d4c9a9b964898a784f, type: 3}
-  _adminConsoleTextPrefab: {fileID: 1059326579344079441, guid: 09da02c2e784531499e64126243d0dae, type: 3}
   _consoleInput: {fileID: 758878991}
   _consoleTextParent: {fileID: 1853340273}
 --- !u!114 &1950202350
@@ -1557,8 +1556,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58b60ed5fd9a9504a97b9fef027a2f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fileWindowPrefab: {fileID: 2711717371946881060, guid: ab1647a0870436143b110b19f94aac65, type: 3}
-  _shopWindowPrefab: {fileID: 5026955488400338044, guid: 052ec52f3850d514993e7e8c0b9be15e, type: 3}
   _windowParentTransform: {fileID: 676656084}
 --- !u!114 &1950202351
 MonoBehaviour:
@@ -1572,7 +1569,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68d92d6182b078e4e85dea1f67e5fb3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bitcoinPrefab: {fileID: 2522369658643268392, guid: 2bb3cd7ef952e9a43918220c626e8c33, type: 3}
   _bitcoinCanvasTransform: {fileID: 771027412}
   _moneyText: {fileID: 1218195212}
 --- !u!114 &1950202352
@@ -1617,6 +1613,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstDialogueWhenCommandsRan: {fileID: 11400000, guid: f351e8463f5e3814f892de27aaf402ba, type: 2}
+--- !u!114 &1950202355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950202347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac25c35e27e70294d8f59f9fd76b628b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _csUserTextPrefab: {fileID: 1494178902477216639, guid: fda57f18519156d4c9a9b964898a784f, type: 3}
+  _csAdminTextPrefab: {fileID: 1059326579344079441, guid: 09da02c2e784531499e64126243d0dae, type: 3}
+  _fileWindowPrefab: {fileID: 2711717371946881060, guid: ab1647a0870436143b110b19f94aac65, type: 3}
+  _shopWindowPrefab: {fileID: 5026955488400338044, guid: 052ec52f3850d514993e7e8c0b9be15e, type: 3}
+  _moneyParticlePrefab: {fileID: 2522369658643268392, guid: 2bb3cd7ef952e9a43918220c626e8c33, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

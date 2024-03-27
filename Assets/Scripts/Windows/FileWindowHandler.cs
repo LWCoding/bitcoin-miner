@@ -18,7 +18,7 @@ public class FileWindowHandler : WindowHandler
     public override void DestroyWindow()
     {
         SaveFileContents();
-        base.DestroyWindow();
+        ObjectFactory.Instance.ReturnObjectToPool(gameObject, PoolableType.FILE_WINDOW);
     }
 
     public void SaveFileContents()

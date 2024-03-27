@@ -8,9 +8,6 @@ public class WindowManager : MonoBehaviour
 
     public static WindowManager Instance;
 
-    [Header("Prefab Assignments")]
-    [SerializeField] private GameObject _fileWindowPrefab;
-    [SerializeField] private GameObject _shopWindowPrefab;
     [Header("Object Assignments")]
     [SerializeField] private Transform _windowParentTransform;
 
@@ -38,10 +35,10 @@ public class WindowManager : MonoBehaviour
         // Open different window depending on file type
         switch (currFile.FileType) {
             case FileType.FILE:
-                windowObj = Instantiate(_fileWindowPrefab, _windowParentTransform);
+                windowObj = ObjectFactory.Instance.GetPooledObject(PoolableType.FILE_WINDOW, _windowParentTransform);
                 break;
             case FileType.SHOP:
-                windowObj = Instantiate(_shopWindowPrefab, _windowParentTransform);
+                windowObj = ObjectFactory.Instance.GetPooledObject(PoolableType.SHOP_WINDOW, _windowParentTransform);
                 break;
         }
         windowObj.GetComponent<WindowHandler>().Initialize(currFile);

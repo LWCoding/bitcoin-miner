@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class ShopWindowHandler : WindowHandler
 {
-
-
+    public override void DestroyWindow()
+    {
+        ObjectFactory.Instance.ReturnObjectToPool(gameObject, PoolableType.SHOP_WINDOW);
+    }
 
 }

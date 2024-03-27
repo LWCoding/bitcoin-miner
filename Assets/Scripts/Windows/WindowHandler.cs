@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class WindowHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
+public abstract class WindowHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
 {
 
     [Header("Object Assignments")]
@@ -15,6 +15,12 @@ public class WindowHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
     private Vector3 _mouseOffset;
     private Camera _mainCamera;
     private RectTransform _rectTransform;
+
+    /// <summary>
+    /// Code to run after this window is destroyed. Should return the
+    /// window back to the pool if created this way.
+    /// </summary>
+    public abstract void DestroyWindow();
 
     private void Awake()
     {
@@ -33,11 +39,6 @@ public class WindowHandler : MonoBehaviour, IDragHandler, IBeginDragHandler
     {
         int idx = GameState.CreatedFiles.FindIndex((gf) => gf.FileName == CurrentFileInfo.FileName);
         WindowManager.Instance.CloseFileWindow(idx);
-    }
-
-    public virtual void DestroyWindow()
-    {
-        Destroy(gameObject);
     }
 
     public void OnDrag(PointerEventData eventData)
