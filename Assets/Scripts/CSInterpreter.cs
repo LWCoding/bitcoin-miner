@@ -82,7 +82,9 @@ public class CSInterpreter
         // Run the command and return response afterwards.
         commandToExec?.RunCommand(tokens, ref res);
 
-        GameState.CommandsRun++;  // Increment number of commands run
+        if (res.status == CSStatus.OK) {
+            GameState.CommandsRun++;  // Increment number of commands run
+        }
 
         return res;
     }
