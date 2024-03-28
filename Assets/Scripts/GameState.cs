@@ -29,10 +29,22 @@ public static class GameState
         }
     }
 
+    private static int _purchasesMade = 0;
+    public static int PurchasesMade
+    {
+        get => _purchasesMade;
+        set
+        {
+            _purchasesMade = value;
+            OnPurchasedFromShop?.Invoke(value);
+        }
+    }
+
     public static int PermissionCount = 0;  // Dictates what commands the user can call
 
     public static Action<float> OnChangeBitcoin = null;  // Calls when clicks are set
     public static Action<int> OnChangeCommandsRun = null;  // Calls when commands are run
+    public static Action<int> OnPurchasedFromShop = null;  // Calls when purchase is made
 
     public static Dictionary<PurchaseType, int> Purchases = new();  // Stores state of all purchases
 

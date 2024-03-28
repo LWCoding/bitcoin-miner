@@ -32,7 +32,7 @@ public class CSDialogueScripter : MonoBehaviour
 
     public void InterpretDialogue(Dialogue d)
     {
-        if (d == null) { return; }
+        Debug.Assert(d != null, "Null dialogue was played", this);
         _csTextManager.ToggleConsoleInput(false);  // Disallow user from typing
         _dialogueQueue = new Queue<DialogueLine>(d.DialogueLines);
         StartCoroutine(RenderAllDialogueInQueue());

@@ -48,8 +48,9 @@ public abstract class Purchase : MonoBehaviour
         // Don't let the user buy if the upgrade isn't purchaseable
         if (currLevel.PurchaseCost == -1) { return; }
         // Upgrade the GameState to reflect this change
-        RenderPurchase(currLevel);
+        RenderPurchase(currLevel);  // Render BEFORE upgrading
         GameState.Purchases[GetPurchaseType()] = ++_currLevel;
+        GameState.PurchasesMade++;
         UpdateUpgradeInfo();
     }
 
@@ -59,7 +60,6 @@ public abstract class Purchase : MonoBehaviour
     public void UpdateUpgradeInfo()
     {
         PurchaseInfo currLevel = GetCurrentPurchaseInfo();
-        Debug.Log(currLevel.PurchaseDesc);
         _shopPurchaseHandler.Initialize(currLevel);
     }
 

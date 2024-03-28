@@ -1675,6 +1675,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _firstDialogueWhenCommandsRan: {fileID: 11400000, guid: f351e8463f5e3814f892de27aaf402ba, type: 2}
+  _firstDialogueWhenPurchaseMade: {fileID: 11400000, guid: 58f1a2976e7290441bd42036b2a979ea, type: 2}
 --- !u!114 &1950202355
 MonoBehaviour:
   m_ObjectHideFlags: 0

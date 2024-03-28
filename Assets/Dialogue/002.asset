@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 08648af9636680a40b2f2f0a7edd7ad5, type: 3}
-  m_Name: 001
+  m_Name: 002
   m_EditorClassIdentifier: 
   DialogueLines:
   - DelayBefore: 0
@@ -18,21 +18,9 @@ MonoBehaviour:
     Color: yellow
     SendInstantly: 1
     EventToPlayAfter: 0
-  - DelayBefore: 1
-    Text: Looks like you're getting the hang of things.
-    Color: red
-    SendInstantly: 0
-    EventToPlayAfter: 0
   - DelayBefore: 2
-    Text: Though, typing all that can be a pain. I recommend downloading extensions
-      to speed things up.
+    Text: yo, no way, pog! you actually bought something. did not expect that lmao
+      (this is the end of what i've done so far - skylar)
     Color: red
     SendInstantly: 0
-    EventToPlayAfter: 0
-  - DelayBefore: 2
-    Text: I'm not sharing any of mine. Instead, I'll give you access to the virtual
-      shop. You can go there to make mining more convenient. Check your files and
-      open the shop.
-    Color: red
-    SendInstantly: 0
-    EventToPlayAfter: 3
+    EventToPlayAfter: 2
