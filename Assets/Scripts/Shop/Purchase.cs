@@ -59,6 +59,7 @@ public abstract class Purchase : MonoBehaviour
     public void UpdateUpgradeInfo()
     {
         PurchaseInfo currLevel = GetCurrentPurchaseInfo();
+        Debug.Log(currLevel.PurchaseDesc);
         _shopPurchaseHandler.Initialize(currLevel);
     }
 

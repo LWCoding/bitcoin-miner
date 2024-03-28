@@ -992,22 +992,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Levels:
   - PurchaseName: Mining Rig I
-    PurchaseDesc: 'Passively mines BTC. Upgrade to increase mining speed. (Current:
-      0/sec)'
+    PurchaseDesc: Passively mines BTC. Upgrade to increase mining speed. (%cur BTC/sec
+      -> %new BTC/sec)
     PurchaseCost: 0.00015
     SpecialValue: 0.00002
   - PurchaseName: Mining Rig II
-    PurchaseDesc: 'Passively mines BTC. Upgrade to increase mining speed. (Current:
-      0.00002/sec)'
+    PurchaseDesc: Passively mines BTC. Upgrade to increase mining speed. (%cur BTC/sec
+      -> %new BTC/sec)
     PurchaseCost: 0.002
     SpecialValue: 0.00003
   - PurchaseName: Mining Rig III
-    PurchaseDesc: 'Passively mines BTC. Upgrade to increase mining speed. (Current:
-      0.00005/sec)'
+    PurchaseDesc: Passively mines BTC. Upgrade to increase mining speed. (%cur BTC/sec
+      -> %new BTC/sec)
     PurchaseCost: 0.01
     SpecialValue: 0.00005
   - PurchaseName: Mining Rig (MAX)
-    PurchaseDesc: 'Passively mines BTC. Upgrade to increase mining speed. (Current:
-      0.0001/sec)'
+    PurchaseDesc: Passively mines BTC. Upgrade to increase mining speed. (%cur BTC/sec
+      -> %new BTC/sec)
     PurchaseCost: -1
     SpecialValue: -1
