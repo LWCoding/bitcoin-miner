@@ -16,6 +16,8 @@ public static class GameState
         }
     }
 
+    public static float ClicksPerSecond = 0;
+
     private static int _commandsRun = 0;
     public static int CommandsRun
     {
@@ -31,6 +33,8 @@ public static class GameState
 
     public static Action<float> OnChangeBitcoin = null;  // Calls when clicks are set
     public static Action<int> OnChangeCommandsRun = null;  // Calls when commands are run
+
+    public static Dictionary<PurchaseType, int> Purchases = new();  // Stores state of all purchases
 
     public static List<GameFile> CreatedFiles = new();  // Empty list to hold created files
     public const int FILENAME_MAX_LENGTH = 12;  // Max name length of any file

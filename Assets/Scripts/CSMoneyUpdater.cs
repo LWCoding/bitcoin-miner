@@ -25,6 +25,14 @@ public class CSMoneyUpdater : MonoBehaviour
         ToggleTextVisibility(false);
     }
 
+    private void Start()
+    {
+        StartCoroutine(RenderClicksPerSecondCoroutine());
+    }
+
+    /// <summary>
+    /// Update the text displayed in the money counter.
+    /// </summary>
     public void UpdateMoneyCount(float newVal)
     {
         if (_moneyText.IsActive())
@@ -33,6 +41,9 @@ public class CSMoneyUpdater : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Toggles the visibility of the money counter.
+    /// </summary>
     public void ToggleTextVisibility(bool isEnabled)
     {
         _moneyText.gameObject.SetActive(isEnabled);
@@ -51,6 +62,8 @@ public class CSMoneyUpdater : MonoBehaviour
         }
     }
 
+    #region AnimateBTC Coroutine
+
     private IEnumerator AnimateBTCFromPositionToTextCoroutine(Vector3 startPos, float waitBefore = 0)
     {
         yield return new WaitForSeconds(waitBefore);
@@ -67,6 +80,19 @@ public class CSMoneyUpdater : MonoBehaviour
             yield return null;
         }
         ObjectFactory.Instance.ReturnObjectToPool(btcObject, PoolableType.MONEY_PARTICLE);
+    }
+
+    #endregion
+
+    /// <summary>
+    /// Loops and applies the clicks per second bonus to the user's current
+    /// clicks.
+    /// </summary>
+    private IEnumerator RenderClicksPerSecondCoroutine()
+    {
+        GameState.Clicks += GameState.ClicksPerSecond;
+        yield return new WaitForSeconds(1);
+        StartCoroutine(RenderClicksPerSecondCoroutine());
     }
 
 }
