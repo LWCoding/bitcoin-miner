@@ -20,6 +20,8 @@ public class ObjectFactory : MonoBehaviour
     [SerializeField] private GameObject _fileWindowPrefab;
     [SerializeField] private GameObject _shopWindowPrefab;
     [SerializeField] private GameObject _moneyParticlePrefab;
+    [Header("Object Assignments")]
+    [SerializeField] private Transform _pooledParentTransform;
 
     private readonly Dictionary<PoolableType, Queue<GameObject>> _pooledObjects = new();
 
@@ -72,6 +74,7 @@ public class ObjectFactory : MonoBehaviour
         GameObject obj = _qToDequeue.Dequeue();
         obj.SetActive(true);
         obj.transform.SetParent(parent, false);
+        obj.transform.localScale = Vector3.one;
         if (obj.TryGetComponent(out PoolableObject poolable))
         {
             poolable.OnSpawn();
@@ -93,6 +96,7 @@ public class ObjectFactory : MonoBehaviour
         {
             poolable.OnDespawn();
         }
+        obj.transform.SetParent(_pooledParentTransform);
         obj.SetActive(false);
         _pooledObjects[type].Enqueue(obj);
     }

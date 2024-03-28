@@ -4,6 +4,17 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 
+public struct ConsoleLine
+{
+    public PoolableType Type;
+    public GameObject TextObject;
+    public ConsoleLine(GameObject to, PoolableType t)
+    {
+        Type = t;
+        TextObject = to;
+    }
+}
+
 public class CSTextManager : MonoBehaviour
 {
 
@@ -12,6 +23,14 @@ public class CSTextManager : MonoBehaviour
     [SerializeField] private Transform _consoleTextParent;
 
     private readonly CSInterpreter _interpreter = new();
+
+    /// <summary>
+    /// Stores a cached list of BOTH admin text prefabs AND user
+    /// text prefabs. When it reaches a certain amount, will prune
+    /// out old entries for performance reasons.
+    /// </summary>
+    private readonly Queue<ConsoleLine> _consoleLineObjects = new();
+    private const int MAXIMUM_ALLOWED_LINES = 40;
 
     private void TryFocusInput()
     {
@@ -54,6 +73,7 @@ public class CSTextManager : MonoBehaviour
         GameObject textObj = ObjectFactory.Instance.GetPooledObject(PoolableType.CS_ADMIN_TEXT, _consoleTextParent); 
         string textToSend = "<color=\"" + color + "\">" + text + "</color>";
         textObj.GetComponent<TextMeshProUGUI>().text = textToSend;
+        RegisterConsoleLineObject(textObj, PoolableType.CS_ADMIN_TEXT);
         return textObj.GetComponent<TextMeshProUGUI>();
     }
 
@@ -68,6 +88,7 @@ public class CSTextManager : MonoBehaviour
         TryFocusInput();
         GameObject textObj = ObjectFactory.Instance.GetPooledObject(PoolableType.CS_USER_TEXT, _consoleTextParent);
         textObj.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = cmd;  // Child object has actual text
+        RegisterConsoleLineObject(textObj, PoolableType.CS_USER_TEXT);
         CSInterpreterResponse res = _interpreter.Interpret(cmd);
         // If we have an error, send that message out!
         if (res.status == CSStatus.ERROR)
@@ -84,6 +105,16 @@ public class CSTextManager : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
         EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void RegisterConsoleLineObject(GameObject textObj, PoolableType type)
+    {
+        _consoleLineObjects.Enqueue(new ConsoleLine(textObj, type));
+        if (_consoleLineObjects.Count > MAXIMUM_ALLOWED_LINES)
+        {
+            ConsoleLine lineToRemove = _consoleLineObjects.Dequeue();
+            ObjectFactory.Instance.ReturnObjectToPool(lineToRemove.TextObject, lineToRemove.Type);
+        }
     }
 
 }
