@@ -1007,7 +1007,6 @@ MonoBehaviour:
     PurchaseCost: 0.01
     SpecialValue: 0.00005
   - PurchaseName: Mining Rig (MAX)
-    PurchaseDesc: Passively mines BTC. Upgrade to increase mining speed. (%cur BTC/sec
-      -> %new BTC/sec)
+    PurchaseDesc: Passively mines BTC. Upgrade to increase mining speed. (%cur BTC/sec)
     PurchaseCost: -1
     SpecialValue: -1
