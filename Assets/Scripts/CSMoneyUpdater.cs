@@ -57,7 +57,7 @@ public class CSMoneyUpdater : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            Vector3 randomOffset = new(Random.Range(-0.3f, 0.3f), Random.Range(-0.3f, 0.3f));
+            Vector3 randomOffset = new(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f));
             StartCoroutine(AnimateBTCFromPositionToTextCoroutine(startPos + randomOffset, i * 0.01f));
         }
     }
@@ -67,7 +67,7 @@ public class CSMoneyUpdater : MonoBehaviour
     private IEnumerator AnimateBTCFromPositionToTextCoroutine(Vector3 startPos, float waitBefore = 0)
     {
         yield return new WaitForSeconds(waitBefore);
-        Vector3 finalPos = _moneyText.transform.position;
+        Vector3 finalPos = _moneyText.transform.position - new Vector3(0.3f, 0.3f);
         GameObject btcObject = ObjectFactory.Instance.GetPooledObject(PoolableType.MONEY_PARTICLE, _bitcoinCanvasTransform);
         btcObject.transform.position = startPos;
         float currTime = 0;

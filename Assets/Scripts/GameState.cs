@@ -2,8 +2,32 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+public enum Mode
+{
+    DEFAULT = 0, MINING = 1
+}
+
 public static class GameState
 {
+
+    private static float _prevClickMultiplier;
+    private static Mode _currentMode = Mode.DEFAULT;
+    public static Mode CurrentMode
+    {
+        get => _currentMode;
+        set {
+            switch (value)
+            {
+                case Mode.DEFAULT:
+                    ClickCSCommand.ClickMultiplier = _prevClickMultiplier;
+                    break;
+                case Mode.MINING:
+                    _prevClickMultiplier = ClickCSCommand.ClickMultiplier;
+                    break;
+            }
+            _currentMode = value;
+        }
+    }
 
     private static float _clicks = 0;
     public static float Clicks

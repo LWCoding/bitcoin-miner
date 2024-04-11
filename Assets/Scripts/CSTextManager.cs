@@ -44,6 +44,7 @@ public class CSTextManager : MonoBehaviour
     private void Awake()
     {
         _consoleInput.onSubmit.AddListener((s) => SubmitTextToConsole(s));
+        _consoleInput.onValueChanged.AddListener((s) => OnTextTyped(s));
         TryFocusInput();
     }
 
@@ -98,6 +99,32 @@ public class CSTextManager : MonoBehaviour
         if (res.text != "")
         {
             AnnounceInConsole(res.text, (res.status == CSStatus.OK) ? "green" : "red");
+        }
+    }
+
+    private void OnTextTyped(string newStr)
+    {
+        switch (GameState.CurrentMode)
+        {
+            case Mode.DEFAULT:
+                break;
+            case Mode.MINING:
+                // If we're mining, don't render any input
+                _consoleInput.text = "";
+                // If the key should escape mining mode, leave mining mode.
+                if (newStr.ToLower() == "z")
+                {
+                    GameState.CurrentMode = Mode.DEFAULT;
+                    AnnounceInConsole("Exit requested. Returning to default state", "green");
+                    break;
+                }
+                // Instead, add to the user's money value
+                CSInterpreterResponse res = new();
+                new ClickCSCommand().RunCommand(null, ref res);
+                // Animate some money
+                Vector2 textSpawnpoint = _consoleInput.transform.position + new Vector3(0.3f, 0.3f);
+                CSMoneyUpdater.Instance.AnimateBTCFromPositionToText(textSpawnpoint, 1);
+                break;
         }
     }
 

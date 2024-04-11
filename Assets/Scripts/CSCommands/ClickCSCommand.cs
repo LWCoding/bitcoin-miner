@@ -5,7 +5,9 @@ using UnityEngine;
 
 public class ClickCSCommand : BaseCSCommand
 {
-   
+
+    public static float ClickMultiplier = 1;
+
     public override string GetCommandUsageEx() => "mine";
     public override string GetCommandDescription() =>
 @"Mines bitcoin. Adds it to your persistent wallet.";
@@ -20,7 +22,7 @@ public class ClickCSCommand : BaseCSCommand
 
     private void Click(ref CSInterpreterResponse res)
     {
-        float earnedMoney = (float)_random.NextDouble() / 1000;
+        float earnedMoney = (float)_random.NextDouble() / 1000 * ClickMultiplier;
         GameState.Clicks += earnedMoney;
         res.text = "Mining attempt earned " + earnedMoney.ToString("F5") + " BTC";
         res.status = CSStatus.OK;

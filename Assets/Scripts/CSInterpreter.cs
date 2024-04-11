@@ -65,6 +65,9 @@ public class CSInterpreter
             case "close":
                 commandToExec = new CloseCSCommand();
                 break;
+            case "mode":
+                commandToExec = new ModeCSCommand();
+                break;
             default:
                 res.text = "Unknown command. For a full list of commands, type <b>help</b>";
                 res.status = CSStatus.ERROR;  // If not identified, ERROR
